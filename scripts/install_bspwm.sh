@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Instalando dependências
+echo "Instalando pacotes necessários..."
 sudo pacman -S --needed \
     xorg \
     xorg-xinit \
@@ -8,7 +10,8 @@ sudo pacman -S --needed \
     xcb-utils-keysyms \
     xcb-util-cursor
 
-# Instalando bspwm e sxhkd
+# Instalando bspwm
+echo "Instalando bspwm e cia..."
 sudo pacman -S --needed \
     bspwm \
     sxhkd \
@@ -18,9 +21,14 @@ sudo pacman -S --needed \
     vim \
     xdg-user-dirs-gtk \
 
+# Configurando bspwm
+echo "Configurando bspwm..."
 mkdir -p $HOME/.config/{bspwm,sxhkd,polybar}
-install -Dm755 /usr/share/doc/bspwm/examples/bspwmrc $HOME/.config/bspwm/bspwmrc
-install -Dm644 /usr/share/doc/bspwm/examples/sxhkdrc $HOME/.config/sxhkd/sxhkdrc
-install -Dm644 /usr/share/doc/polybar/config $HOME/.config/polybar/config
+install -Dm755 $HOME/usr/share/doc/bspwm/examples/bspwmrc $HOME/.config/bspwm/bspwmrc
+install -Dm644 $HOME/usr/share/doc/bspwm/examples/sxhkdrc $HOME/.config/sxhkd/sxhkdrc
+install -Dm644 $HOME/usr/share/doc/polybar/config $HOME/.config/polybar/config
 cp -r $HOME/etc/X11/xinit/xinitrc $HOME/.xinitrc
+
+# Configurando xdg-user-dirs
+echo "Configurando xdg-user-dirs..."
 xdg-user-dirs-update
