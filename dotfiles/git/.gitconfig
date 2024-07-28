@@ -3,5 +3,3 @@
 	name = Vitor11001
 [core]
 	editor = code --wait
-[color]
-    ui = auto
