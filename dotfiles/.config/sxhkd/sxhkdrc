@@ -126,3 +126,11 @@ super + alt + shift + {h,j,k,l}
 # move a floating window
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+# Mover janelas flutuantes com botão esquerdo do mouse
+super + button1
+    bspc node -v $(xdotool getmouselocation --shell | awk -F '=' '{print $2}' | sed -n '1p' | tr -d '\n') $(xdotool getmouselocation --shell | awk -F '=' '{print $2}' | sed -n '2p')
+
+# Redimensionar janelas flutuantes com botão direito do mouse
+super + button3
+    bspc node -z bottom_right $(xdotool getmouselocation --shell | awk -F '=' '{print $2}' | sed -n '1p') $(xdotool getmouselocation --shell | awk -F '=' '{print $2}' | sed -n '2p')

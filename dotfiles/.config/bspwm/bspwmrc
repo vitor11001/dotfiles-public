@@ -4,7 +4,7 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 nitrogen --restore &
 # dunst &
 # polybar &
-picom --config $HOME/.config/picom/picom.conf &
+# picom --config $HOME/.config/picom/picom.conf &
 
 ## Configurations --------------------------------------------#
 
