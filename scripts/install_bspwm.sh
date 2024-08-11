@@ -10,7 +10,8 @@ sudo pacman -S --needed \
     xorg-xinit \        # Inicializador do servidor X.
     xorg-xrandr \       # Utilitário para configurar a resolução da tela.
     xorg-xsetroot \     # Utilitário para definir a cor da raiz.
-    xorg-xprop          # Utilitário para visualizar propriedades de janelas.
+    xorg-xprop \        # Utilitário para visualizar propriedades de janelas.
+    xorg-xev
 
 # Instalando bspwm
 echo "Instalando bspwm e cia..."
