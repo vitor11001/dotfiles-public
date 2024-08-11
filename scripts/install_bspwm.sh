@@ -28,6 +28,16 @@ sudo pacman -S --needed \
     ttf-meslo-nerd-font \
     ttf-roboto
 
+echo "Instalando pacotes necessarios..."
+sudo pacman -S --needed \
+    bluez \
+    bluez-utils \
+    htop \
+    ntfs-3g \
+    pulseaudio \
+    pulseaudio-alsa \
+    pulseaudio-bluetooth \
+
 # Instalando programas adicionais
 echo "Instalando programas adicionais..."
 sudo pacman -S --needed \
