@@ -36,7 +36,7 @@ sudo pacman -S --needed \
     ntfs-3g \
     pulseaudio \
     pulseaudio-alsa \
-    pulseaudio-bluetooth \
+    pulseaudio-bluetooth 
 
 # Instalando programas adicionais
 echo "Instalando programas adicionais..."
