@@ -30,6 +30,7 @@ two_monitors_workspaces() {
 	fi
 }
 
+
 ## Three Monitors Setup (Laptop and two external monitor, 3-2-3 workspaces)
 three_monitors_workspaces() {
 	# again, change these values accordingly
