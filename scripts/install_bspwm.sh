@@ -71,8 +71,7 @@ sudo pacman -S --needed \
     ntfs-3g \
     pipewire \
     pipewire-alsa \
-    pipewire-pulse \
-    pipewire-bluetooth
+    pipewire-pulse 
 
 # Habilitando serviços
 echo "Habilitando bluetooth..."
