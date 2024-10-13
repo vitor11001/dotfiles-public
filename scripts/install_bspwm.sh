@@ -108,7 +108,6 @@ sudo pacman -S --needed base-devel git
 cd ~  # Navega para o diretório HOME
 git clone https://aur.archlinux.org/paru.git
 cd paru || exit 1  # Garante que o script pare se o diretório não for acessível
-su -c "makepkg -si"
 makepkg -si
 cd ..
 rm -rf paru  # Remove o diretório clonado do paru
