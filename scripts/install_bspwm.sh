@@ -25,18 +25,15 @@ sudo pacman -S --needed \
     ttf-firecode \
     ttf-font-awesome \
     noto-fonts-emoji \
-    ttf-meslo-nerd-font \
     ttf-roboto
 
 echo "Instalando pacotes necessarios..."
 sudo pacman -S --needed \
     bluez \
     bluez-utils \
+    blueman \
     htop \
-    ntfs-3g \
-    pulseaudio \
-    pulseaudio-alsa \
-    pulseaudio-bluetooth 
+    ntfs-3g \        # Driver NTFS
 
 # Instalando programas adicionais
 echo "Instalando programas adicionais..."
