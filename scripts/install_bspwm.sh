@@ -52,7 +52,10 @@ sudo pacman -S --needed \
     ttf-fira-code \
     ttf-font-awesome \
     noto-fonts-emoji \
-    ttf-roboto
+    ttf-roboto \
+    ttf-jetbrains-mono \
+    ttf-jetbrains-mono-nerd \
+    ttf-font-awesome
 
 # Instalando outros pacotes essenciais
 echo "Instalando pacotes necessarios..."
