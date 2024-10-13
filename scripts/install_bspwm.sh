@@ -105,6 +105,7 @@ xdg-user-dirs-update
 echo "Instalando o paru..."
 confirm "Você deseja instalar o paru?"
 sudo pacman -S --needed base-devel git
+cd ~  # Navega para o diretório HOME
 git clone https://aur.archlinux.org/paru.git
 cd paru || exit 1  # Garante que o script pare se o diretório não for acessível
 makepkg -si
