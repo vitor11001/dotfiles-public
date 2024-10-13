@@ -3,11 +3,11 @@
 # Função para solicitar confirmação
 confirm() {
     while true; do
-        read -p "$1 [y/n]: " resposta
-        case $resposta in
-            [Yy]* ) return 0;  # Continua
-            [Nn]* ) echo "Saindo..."; exit 1;  # Sai
-            * ) echo "Por favor, responda com y ou n.";  # Solicita resposta válida
+        read -p "$1 [y/n]: " yn
+        case $yn in
+            [Yy]* ) return 0;;
+            [Nn]* ) echo "Operação cancelada."; exit;;
+            * ) echo "Por favor, responda com 'y' ou 'n'.";;
         esac
     done
 }
