@@ -55,7 +55,7 @@ sudo pacman -S --needed \
 echo "Instalando fontes..."
 confirm "Você deseja instalar as fontes necessárias?"
 sudo pacman -S --needed \
-    ttf-firacode \
+    ttf-fira-code \
     ttf-font-awesome \
     noto-fonts-emoji \
     ttf-roboto
@@ -95,7 +95,6 @@ sudo pacman -S --needed \
     curl \
     htop \
     picom \
-    dunst \
     openssh \
     openssl \
     procps-ng
