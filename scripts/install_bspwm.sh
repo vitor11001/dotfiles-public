@@ -12,12 +12,6 @@ confirm() {
     done
 }
 
-# Verifica se o usuário tem privilégios de root
-if [ "$EUID" -ne 0 ]; then
-    echo "Por favor, execute como root (use sudo)."
-    exit
-fi
-
 echo "Atualizando o sistema..."
 confirm "Você deseja atualizar o sistema?"
 sudo pacman -Syu
