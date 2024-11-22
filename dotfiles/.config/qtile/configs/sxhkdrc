@@ -1,0 +1,5 @@
+button6
+	pamixer --increase 1
+
+button7
+	pamixer --decrease 1

@@ -1,136 +1,205 @@
-#
-# wm independent hotkeys
+#  ███████╗██╗  ██╗██╗  ██╗██╗  ██╗██████╗ ██████╗  ██████╗
+#  ██╔════╝╚██╗██╔╝██║  ██║██║ ██╔╝██╔══██╗██╔══██╗██╔════╝
+#  ███████╗ ╚███╔╝ ███████║█████╔╝ ██║  ██║██████╔╝██║
+#  ╚════██║ ██╔██╗ ██╔══██║██╔═██╗ ██║  ██║██╔══██╗██║
+#  ███████║██╔╝ ██╗██║  ██║██║  ██╗██████╔╝██║  ██║╚██████╗
+#  ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝ ╚═════╝
+#	z0mbi3			https://github.com/gh0stzk/dotfiles
 #
 
-# terminal emulator
+# Show help
+alt + F1
+	OpenApps --KeyHelp
+
+#|||----- Applications -----|||#
+
+# Open Terminal
 super + Return
-	kitty
+	OpenApps --terminal
 
-# program launcher
-super + @space
-	rofi -show drun
+# Open floating Terminal
+super + alt + Return
+	OpenApps --floating
 
-# Rofi Menus/Applets
-super + {r,i}
-	rofi -show {run,window}
+# Application menu
+alt + F12
+	OpenApps --menu
 
-# make sxhkd reload its configuration files:
-super + Escape
-	pkill -USR1 -x sxhkd
+#####
 
-#
-# bspwm hotkeys
-#
+# Apps (browser, editor, filemanager)
+shift + alt + {b,g,n}
+	OpenApps {--browser,--editor,--filemanager}
 
-# quit/restart bspwm
-super + alt + {q,r}
-	bspc {quit,wm -r}
+# Terminal apps (ranger, nvim, ncmpcpp)
+shift + alt + {y,v,k}
+	OpenApps {--yazi,--nvim,--music}
+
+# Pavucontrol
+shift + alt + p
+	OpenApps --soundcontrol
+
+
+#|||----- System Keybindings -----|||#
+
+# Theme Selector
+alt + @space
+	RiceSelector
+
+#Terminal Selector
+super + alt + t
+	Term --selecterm
+
+# jgmenu
+~button3
+  xqp 0 $(xdo id -N Bspwm -n root) && jgmenu --csv-file=~/.config/bspwm/src/config/jgmenu.txt --config-file=~/.config/bspwm/src/config/jgmenurc
+
+# Scratchpad
+super + alt + o
+	tdrop -a -w 70% -h 35% -y 0 -x 15%  --class scratch alacritty --class=scratch
+
+# Power off, Reboot, Log out, Lockscreen, kill an app
+ctrl + super + alt + {p,r,q,l,k}
+	{systemctl poweroff, systemctl reboot,bspc quit,ScreenLocker,xkill}
+
+# Hide/Show Bar (Polybar and/or eww)
+super + alt + {h,u}
+	HideBar {-h,-u}
+
+# Change transparency on focused window
+ctrl + alt + {plus,minus,t}
+	picom-trans {-c -o +3,-c -o -1,-c -d}
+
+# Random wallpaper
+super + alt + w
+	WallSelect
+
+# Mount Android phones
+super + alt + a
+	OpenApps --android
+
+# Network Manager
+super + alt + n
+	OpenApps --netmanager
+
+# Clipboard
+super + alt + c
+	OpenApps --clipboard
+
+# Screenshot
+super + alt + s
+	OpenApps --screenshot
+
+# Bluetooth
+super + alt + b
+	OpenApps --bluetooth
+
+# PowerMenu
+super + alt + p
+	OpenApps --powermenu
+
+# Keyboard Layout Applet
+super + alt + k
+	OpenApps --keyboard
+
+# Manage brightness
+XF86MonBrightness{Up,Down}
+    sh Brightness {up,down}
+
+# Volume control
+XF86Audio{RaiseVolume,LowerVolume,Mute}
+	Volume{ --inc, --dec, --toggle}
+
+# Volume +
+button6
+	Volume --inc1 
+# Volume -
+button7
+	Volume --dec1
+
+# Music Control
+XF86Audio{Next,Prev,Play,Stop}
+	MediaControl {--next,--previous,--toggle,--stop}
+
+
+#|||----- Bspwm hotkeys -----|||#
+
+# Reload BSPWM
+super + alt + r
+	bspc wm -r
 
 # close and kill
-super + {_,shift + }w
+super + {_,shift + }c
 	bspc node -{c,k}
+
+# Reload Keybindings
+super + Escape
+	pkill -USR1 -x sxhkd; dunstify -u low -i ~/.config/bspwm/src/assets/reload.svg 'sxhkd' 'The configuration file has been reloaded successfully!'
+
+#####
 
 # alternate between the tiled and monocle layout
 super + m
 	bspc desktop -l next
-
-# send the newest marked node to the newest preselected node
-super + y
-	bspc node newest.marked.local -n newest.!automatic.local
-
-# swap the current node and the biggest window
-super + g
-	bspc node -s biggest.window
-
-#
-# state/flags
-#
 
 # set the window state
 super + {t,shift + t,s,f}
 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
 # set the node flags
-super + ctrl + {m,x,y,z}
+ctrl + alt {m,x,s,p}
 	bspc node -g {marked,locked,sticky,private}
 
-#
-# focus/swap
-#
+# Hide/Unhide Window
+ctrl + alt + h
+	BspHideNode
 
-# focus the node in the given direction
-super + {_,shift + }{h,j,k,l}
+#####
+
+# rotate desktop
+super + r
+	bspc node @/ --rotate {90,-90}
+
+# Change focus of the Node or Swap Nodes
+shift + super {_,ctrl + }{Left,Down,Up,Right}
 	bspc node -{f,s} {west,south,north,east}
 
-# focus the node for the given path jump
-super + {p,b,comma,period}
-	bspc node -f @{parent,brother,first,second}
-
-# focus the next/previous window in the current desktop
-super + {_,shift + }c
-	bspc node -f {next,prev}.local.!hidden.window
-
-# focus the next/previous desktop in the current monitor
-super + bracket{left,right}
+# Switch workspace
+super + {Left,Right}
 	bspc desktop -f {prev,next}.local
 
+# focus or send to the given desktop
+super + {_,alt + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+
+# Send focused Node to workspace directionally
+super + alt + {Left,Right}
+	bspc node -d {prev,next} '--follow'
+
 # focus the last node/desktop
-super + {grave,Tab}
+super + {comma,Tab}
 	bspc {node,desktop} -f last
 
-# focus the older or newer node in the focus history
-super + {o,i}
-	bspc wm -h off; \
-	bspc node {older,newer} -f; \
-	bspc wm -h on
-
-# focus or send to the given desktop
-super + {_,shift + }{1-9,0}
-	bspc {desktop -f,node -d} '^{1-9,10}' '--follow'
-
-super + {_,shift + }{KP_End, KP_Down, KP_Next, KP_Left, KP_Begin, KP_Right, KP_Home, KP_Up, KP_Prior, KP_Insert}
-    bspc {desktop -f,node -d} '^{1-9,10}' '--follow'
-
-#
-# preselect
-#
+#####
 
 # preselect the direction
-super + ctrl + {h,j,k,l}
+super + {h,j,k,l}
 	bspc node -p {west,south,north,east}
 
-# preselect the ratio
-super + ctrl + {1-9}
-	bspc node -o 0.{1-9}
-
 # cancel the preselection for the focused node
-super + ctrl + space
+super + alt + space
 	bspc node -p cancel
 
-# cancel the preselection for the focused desktop
-super + ctrl + shift + space
-	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+#####
 
-#
-# move/resize
-#
+# expand a window
+ctrl + alt {Left,Down,Up,Right}
+	bspc node -z {left -10 0,bottom 0 10,top 0 -10,right 10 0}
 
-# expand a window by moving one of its side outward
-super + alt + {h,j,k,l}
-	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
-
-# contract a window by moving one of its side inward
-super + alt + shift + {h,j,k,l}
-	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+# contract a window
+ctrl + shift + alt + {Left,Down,Up,Right}
+	bspc node -z {right -10 0,top 0 10,bottom 0 -10,left 10 0}
 
 # move a floating window
-super + {Left,Down,Up,Right}
-	bspc node -v {-20 0,0 20,0 -20,20 0}
-
-# Mover janelas flutuantes com botão esquerdo do mouse
-super + button1
-    bspc node -v $(xdotool getmouselocation --shell | awk -F '=' '{print $2}' | sed -n '1p' | tr -d '\n') $(xdotool getmouselocation --shell | awk -F '=' '{print $2}' | sed -n '2p')
-
-# Redimensionar janelas flutuantes com botão direito do mouse
-super + button3
-    bspc node -z bottom_right $(xdotool getmouselocation --shell | awk -F '=' '{print $2}' | sed -n '1p') $(xdotool getmouselocation --shell | awk -F '=' '{print $2}' | sed -n '2p')
+alt + shift {Left,Down,Up,Right}
+	bspc node -v {-10 0,0 10,0 -10,10 0}
