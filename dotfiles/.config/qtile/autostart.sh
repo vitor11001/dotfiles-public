@@ -19,3 +19,7 @@ pidof -q sxhkd || sxhkd -c $HOME/.config/qtile/configs/sxhkdrc &
 # Iniciar o picom (se já estiver em execução, mata e reinicia)
 pidof -q picom && killall picom
 pidof -q picom || picom --config "${HOME}"/.config/qtile/configs/picom.conf &
+
+# Enable Super Keys For Menu
+ksuperkey -e 'Super_L=Alt_L|F12' &
+ksuperkey -e 'Super_R=Alt_L|F12' &

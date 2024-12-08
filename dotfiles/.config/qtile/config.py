@@ -1,45 +1,23 @@
-# Copyright (c) 2010 Aldo Cortesi
-# Copyright (c) 2010, 2014 dequis
-# Copyright (c) 2012 Randall Ma
-# Copyright (c) 2012-2014 Tycho Andersen
-# Copyright (c) 2012 Craig Barnes
-# Copyright (c) 2013 horsik
-# Copyright (c) 2013 Tao Sauvage
-# Copyright (c) 2024 Jose Vitor
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in
-# all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
-# logs in: cat ~/.local/share/qtile/qtile.log
-
-from libqtile import layout, qtile, hook
-from libqtile.config import Click, Drag, Group, Key, Match
+from modules import KEY_MAP, GROUPS_LIST, LAYOUT_MAP, FLOAT_LAYOUT, SCREENS_BASE
+from libqtile import layout, hook
+from libqtile.config import Click, Drag, Match
+from modules.keys import MOD
 from libqtile.lazy import lazy
 import os
 import subprocess
-from global_vars import MOD, TERMINAL
-from maps import LAYOUT_MAP, KEY_MAP, FLOAT_LAYOUT
-from screens import WIDGET_DEFAULTS, SCREENS_BASE
+from modules.screen_theme_download import screens
 
+
+keys = KEY_MAP
+
+groups = GROUPS_LIST
+
+layouts = LAYOUT_MAP
 
 mod = MOD
-terminal = TERMINAL
 
+screens = SCREENS_BASE
+# screens = screens
 
 @hook.subscribe.startup_once
 def autostart():
@@ -52,42 +30,6 @@ def reload_sxhkd():
     subprocess.Popen(['pkill', 'sxhkd'])
     subprocess.Popen(['sxhkd', '-c', f'{os.path.expanduser("~")}/.config/qtile/configs/sxhkdrc'])
 
-
-keys = KEY_MAP
-
-groups = [Group(i, layout="monadtall") for i in "123456789"]
-
-for i in groups:
-    keys.extend(
-        [
-            # mod + group number = switch to group
-            Key(
-                [mod],
-                i.name,
-                lazy.group[i.name].toscreen(),
-                desc=f"Switch to group {i.name}",
-            ),
-            # mod + shift + group number = switch to & move focused window to group
-            Key(
-                [mod, "shift"],
-                i.name,
-                lazy.window.togroup(i.name, switch_group=True),
-                desc=f"Switch to & move focused window to group {i.name}",
-            ),
-            # Or, use below if you prefer not to switch to that group.
-            # # mod + shift + group number = move focused window to group
-            # Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
-            #     desc="move focused window to group {}".format(i.name)),
-        ]
-    )
-
-layouts = LAYOUT_MAP
-
-
-widget_defaults = WIDGET_DEFAULTS
-extension_defaults = widget_defaults.copy()
-
-screens = SCREENS_BASE
 
 # Drag floating layouts.
 mouse = [
