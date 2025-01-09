@@ -13,7 +13,6 @@ pub const BASE_PACKAGES: &[&str] = &[
     "firefox",
     "htop",
     "neofetch",
-    "vim",
     "zsh",
     "wget",
     "flatpak",
@@ -21,14 +20,16 @@ pub const BASE_PACKAGES: &[&str] = &[
     "xdg-user-dirs",
     "zip",
     "unzip",
-    "tar", 
+    "tar",
     "p7zip",
     "rustup",
     "openssh",
+    "openssl",
     // "visual-studio-code-bin", Instalar via AUR
     "vlc",
     "fzf",
     "python",
+    "qbittorrent",
 ];
 
 pub const NVIDIA_PACKAGES: &[&str] = &[
@@ -36,7 +37,8 @@ pub const NVIDIA_PACKAGES: &[&str] = &[
     "nvidia-lts",
     "nvidia-utils",
     "opencl-nvidia",
-    "lib32-nvidia-utils",
+    "linux-lts-headers",
+    // "lib32-nvidia-utils",
 ];
 
 pub const PIPEWIRE_PACKAGES: &[&str] = &[
@@ -45,6 +47,14 @@ pub const PIPEWIRE_PACKAGES: &[&str] = &[
     "pipewire-alsa",
     "pipewire-jack",
     "wireplumber",
+];
+
+pub const PULSEAUDIO_PACKAGES: &[&str] = &[
+    "pulseaudio",
+    "pulseaudio-alsa",
+    "pulseaudio-jack",
+    "pulseaudio-bluetooth",
+    "pulseaudio-equalizer",
 ];
 
 pub const BLUETOOTH_PACKAGES: &[&str] = &[
@@ -58,25 +68,25 @@ pub const BLUETOOTH_PACKAGES: &[&str] = &[
 pub const HYPERLAND_PACKAGES: &[&str] = &[
     "hyprland",
     "waybar",
-    "rofi-wayland",
-    "alacritty",
     "dunst",
-    "thunar",
     "xdg-desktop-portal-hyprland",
     "qt5-wayland",
     "qt6-wayland",
     "hyprpaper",
     "hyprlock",
-    "firefox",
     "ttf-font-awesome",
-    "vim",
-    "fastfetch",
-    "ttf-fira-sans",
-    // "ttf-fira-code",
     "ttf-firacode-nerd",
     "fuse2",
-    "gtk4",
-    "libadwaita",
-    "jq",
-    "python-gobject",
+];
+
+pub const QTILE_PACKAGES: &[&str] = &[
+    "qtile",
+    "picom",
+    "dunst",
+    "xdg-desktop-portal",
+    "qt5-wayland",
+    "qt6-wayland",
+    "ttf-font-awesome",
+    "ttf-firacode-nerd",
+    "fuse2",
 ];

@@ -3,9 +3,12 @@ from libqtile import layout, hook
 from libqtile.config import Click, Drag, Match
 from modules.keys import MOD
 from libqtile.lazy import lazy
-import os
+from os.path import expanduser
 import subprocess
 from modules.screen_theme_download import screens
+import sys
+
+sys.path.append(expanduser('~/.config/qtile'))
 
 
 keys = KEY_MAP
@@ -21,14 +24,14 @@ screens = SCREENS_BASE
 
 @hook.subscribe.startup_once
 def autostart():
-    home = os.path.expanduser('~/.config/qtile/autostart.sh')
+    home = expanduser('~/.config/qtile/autostart.sh')
     subprocess.call(home)
 
 
 @hook.subscribe.restart
 def reload_sxhkd():
     subprocess.Popen(['pkill', 'sxhkd'])
-    subprocess.Popen(['sxhkd', '-c', f'{os.path.expanduser("~")}/.config/qtile/configs/sxhkdrc'])
+    subprocess.Popen(['sxhkd', '-c', f'{expanduser("~")}/.config/qtile/configs/sxhkdrc'])
 
 
 # Drag floating layouts.
