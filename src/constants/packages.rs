@@ -30,6 +30,7 @@ pub const BASE_PACKAGES: &[&str] = &[
     "fzf",
     "python",
     "qbittorrent",
+    "nemo",
 ];
 
 pub const NVIDIA_PACKAGES: &[&str] = &[
