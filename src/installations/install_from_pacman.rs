@@ -1,30 +1,3 @@
-// use std::process::Command;
-
-
-// pub fn install_from_pacman(packages: &[&str], name_packages_install: &str) {
-//     println!("Installing {}", name_packages_install);
-
-//     let mut command = Command::new("sudo");
-//     command.arg("pacman")
-//            .arg("-S")
-//            .arg("--needed")
-//            .arg("--noconfirm");
-
-//     for package in packages.iter() {
-//         command.arg(package);
-//     }
-
-//     let output = command.output().expect("Failed to execute command");
-
-//     if output.status.success() {
-//         let stdout = String::from_utf8_lossy(&output.stdout);
-//         println!("Output: {}", stdout);
-//     } else {
-//         let stderr = String::from_utf8_lossy(&output.stderr);
-//         eprintln!("Error: {}", stderr);
-//     }
-
-// }
 use std::process::{Command, Stdio};
 use std::io::{self, BufRead};
 
